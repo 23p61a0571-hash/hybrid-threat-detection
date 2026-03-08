@@ -1,0 +1,1 @@
+powershell cmd.exe base64 VirtualAlloc socket http

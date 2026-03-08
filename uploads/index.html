@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure File & URL System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h1>🔐 Secure System</h1>
+    <p>Machine Learning-Based Secure File and URL Processing System</p>
+    <button onclick="toggleDarkMode()" class="dark-btn">🌙 Dark Mode</button>
+</header>
+
+<section class="container">
+    <h2 class="welcome">Welcome</h2>
+    <p class="subtitle">
+        Intelligent security platform to detect malicious URLs and unsafe files.
+    </p>
+
+    <div class="card-container">
+
+        <div class="card">
+            <div class="icon">🔗</div>
+            <h3>URL Safety Checker</h3>
+            <p>Analyze URLs using machine learning to detect phishing threats.</p>
+            <a href="/url-check" class="btn btn-url">Check URL</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">📁</div>
+            <h3>File Safety Checker</h3>
+            <p>Validate uploaded files using secure rule-based techniques.</p>
+            <a href="/file-check" class="btn btn-file">Check File</a>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    © 2026 | Mini Project | CSE
+</footer>
+
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+}
+</script>
+
+</body>
+</html>

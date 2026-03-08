@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<title>File Safety Checker</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<h1>📁 File Safety Checker</h1>
+
+<p>Machine Learning-Based Static File Analysis</p>
+
+<button onclick="toggleDarkMode()" class="dark-btn">🌙 Dark Mode</button>
+
+</header>
+
+
+
+<section class="container">
+
+<h2>Upload File for Safety Check</h2>
+
+<p class="subtitle">
+Upload a file to analyze entropy, suspicious patterns, and ML risk score.
+</p>
+
+
+
+<form method="post" enctype="multipart/form-data">
+
+<div class="file-box">
+
+<label for="fileUpload">
+
+📁 Click here to upload a file <br>
+<small>(PDF, EXE, DOCX, TXT etc.)</small>
+
+</label>
+
+<input type="file" id="fileUpload" name="file" required>
+
+</div>
+
+<button type="submit" class="btn btn-file">Analyze File</button>
+
+</form>
+
+
+
+{% if result %}
+
+<!-- RESULT BADGE -->
+
+<div class="result-badge {{ 'safe' if 'Safe' in result else 'unsafe' }}">
+
+{{ result }}
+
+</div>
+
+
+
+<!-- CONFIDENCE BAR -->
+
+{% if confidence %}
+
+<div class="risk-container">
+
+<p><strong>📊 ML Confidence:</strong> {{ confidence }}%</p>
+
+<div class="risk-bar">
+
+<div class="risk-fill {{ 'low-risk' if 'Safe' in result else 'high-risk' }}"
+style="width: {{ confidence }}%;">
+
+</div>
+
+</div>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- FILE DETAILS -->
+
+{% if file_details %}
+
+<div style="margin-top:20px;text-align:left;">
+
+<h3>🔍 File Analysis Details</h3>
+
+<ul>
+
+<li><strong>File Size:</strong> {{ file_details.file_size }}</li>
+
+<li><strong>Entropy:</strong> {{ file_details.entropy }}</li>
+
+<li><strong>Unique Bytes:</strong> {{ file_details.unique_bytes }}</li>
+
+<li><strong>Suspicious Strings:</strong> {{ file_details.suspicious_string_count }}</li>
+
+<li><strong>Executable File:</strong> {{ file_details.is_executable }}</li>
+
+<li><strong>ASCII Ratio:</strong> {{ file_details.ascii_ratio }}</li>
+
+</ul>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- FEATURE RADAR CHART -->
+
+{% if feature_labels %}
+
+<hr>
+
+<h3 style="text-align:center;">📊 File Feature Analysis</h3>
+
+<div style="width:420px;height:420px;margin:auto;">
+
+<canvas id="featureChart"></canvas>
+
+</div>
+
+<script>
+
+const featureLabels = {{ feature_labels | safe }};
+const featureValues = {{ feature_values | safe }};
+
+const ctx1 = document.getElementById("featureChart").getContext("2d");
+
+new Chart(ctx1, {
+
+type: "radar",
+
+data: {
+
+labels: featureLabels,
+
+datasets: [{
+
+label: "Normalized Feature Score",
+
+data: featureValues,
+
+backgroundColor: "rgba(33,150,243,0.2)",
+borderColor: "#2196F3",
+borderWidth: 2,
+pointBackgroundColor: "#2196F3"
+
+}]
+
+},
+
+options: {
+
+responsive: true,
+maintainAspectRatio: false,
+
+scales: {
+
+r: {
+
+beginAtZero: true,
+max: 100
+
+}
+
+}
+
+}
+
+});
+
+</script>
+
+{% endif %}
+
+
+
+<!-- RISK PIE CHART -->
+
+{% if ml_score %}
+
+<hr>
+
+<h3 style="text-align:center;">⚠ Risk Analysis</h3>
+
+<div style="width:260px;height:260px;margin:auto;">
+
+<canvas id="fileRiskChart"></canvas>
+
+</div>
+
+<script>
+
+const ctx2 = document.getElementById("fileRiskChart").getContext("2d");
+
+new Chart(ctx2, {
+
+type: "doughnut",
+
+data: {
+
+labels: ["ML Detection", "Static Rules"],
+
+datasets: [{
+
+data: [{{ ml_score }}, {{ rule_score }}],
+
+backgroundColor: [
+
+"#f44336",
+"#2196f3"
+
+]
+
+}]
+
+},
+
+options: {
+
+responsive: true,
+maintainAspectRatio: false,
+
+plugins: {
+
+legend: {
+
+position: "bottom"
+
+},
+
+title: {
+
+display: true,
+text: "Threat Detection Contribution"
+
+}
+
+}
+
+}
+
+});
+
+</script>
+
+{% endif %}
+
+
+
+{% endif %}
+
+
+
+<br>
+
+<a href="/" class="btn btn-url">⬅ Back to Home</a>
+
+</section>
+
+
+
+<footer class="footer">
+
+© 2026 | Mini Project | CSE
+
+</footer>
+
+
+
+<script>
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+}
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0px); }
+}/* ===== Base ===== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+    transition: all 0.4s ease;
+}
+
+/* ===== Dark Mode ===== */
+.dark-mode {
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+.dark-mode .card {
+    background: #1e293b;
+}
+
+.dark-mode .footer {
+    background: #020617;
+}
+
+/* ===== Header ===== */
+.navbar {
+    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    padding: 28px;
+    text-align: center;
+}
+
+.dark-btn {
+    margin-top: 15px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* ===== Container ===== */
+.container {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 45px;
+}
+
+/* ===== Cards ===== */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 340px;
+    padding: 30px;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.15);
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+}
+
+/* ===== Icons ===== */
+.icon {
+    font-size: 52px;
+    margin-bottom: 15px;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ===== Buttons ===== */
+.btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-url {
+    background: linear-gradient(90deg, #1c92d2, #0f2027);
+}
+
+.btn-file {
+    background: linear-gradient(90deg, #11998e, #38ef7d);
+}
+
+/* ===== Result Badges ===== */
+.result-badge {
+    margin-top: 20px;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    animation: pop 0.5s ease;
+}
+
+.safe {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    color: white;
+}
+
+.unsafe {
+    background: linear-gradient(90deg, #ef4444, #b91c1c);
+    color: white;
+}
+
+@keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== Footer ===== */
+.footer {
+    background: #0f2027;
+    color: #bbb;
+    padding: 14px;
+    text-align: center;
+}
+/* ===== Stylish Input Wrapper ===== */
+.input-box {
+    position: relative;
+    width: 60%;
+    margin: 25px auto;
+}
+
+/* ===== URL Input ===== */
+.input-box input[type="text"] {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border-radius: 35px;
+    border: 2px solid #d1d5db;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* URL Icon */
+.input-box .icon-inside {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #6b7280;
+}
+
+/* Focus Effect */
+.input-box input:focus {
+    border-color: #1c92d2;
+    box-shadow: 0 0 0 4px rgba(28, 146, 210, 0.15);
+}
+
+/* ===== File Upload Box ===== */
+.file-box {
+    width: 60%;
+    margin: 25px auto;
+    padding: 30px;
+    border: 2px dashed #94a3b8;
+    border-radius: 20px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-box:hover {
+    background: #eef2ff;
+    border-color: #6366f1;
+}
+
+.file-box input[type="file"] {
+    display: none;
+}
+
+.file-box label {
+    font-size: 15px;
+    color: #475569;
+    cursor: pointer;
+}
+
+/* Dark Mode Support */
+.dark-mode .input-box input {
+    background: #020617;
+    color: #e5e7eb;
+    border-color: #334155;
+}
+
+.dark-mode .file-box {
+    background: #020617;
+    border-color: #334155;
+}
+
+.dark-mode .file-box label {
+    color: #cbd5f5;
+}
+/* ===== Loading Spinner ===== */
+.loader {
+    margin: 25px auto;
+    width: 45px;
+    height: 45px;
+    border: 5px solid #e5e7eb;
+    border-top: 5px solid #1c92d2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== Risk Progress Bar ===== */
+.risk-container {
+    width: 60%;
+    margin: 25px auto;
+    text-align: left;
+}
+
+.risk-bar {
+    height: 14px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.risk-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 1s ease;
+}
+
+.low-risk {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.high-risk {
+    background: linear-gradient(90deg, #ef4444, #b91c1c);
+}
+
+/* ===== Safe Checkmark Animation ===== */
+.checkmark {
+    font-size: 40px;
+    color: #22c55e;
+    animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== Unsafe Shake Animation ===== */
+.shake {
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-6px); }
+    100% { transform: translateX(0); }
+}
+.file-container {
+    max-width: 450px;
+    margin: auto;
+    padding: 30px;
+    background: #0f172a;
+    border-radius: 16px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* File upload */
+.file-upload {
+    display: block;
+    padding: 20px;
+    border: 2px dashed #38bdf8;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.file-upload:hover {
+    background: rgba(56,189,248,0.1);
+}
+
+.file-upload input {
+    display: none;
+}
+
+/* Button */
+.check-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.check-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Loader */
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 5px solid #334155;
+    border-top: 5px solid #38bdf8;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Result badges */
+.result-badge {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 18px;
+    animation: pop 0.5s ease;
+}
+
+.safe {
+    background: #16a34a;
+}
+
+.unsafe {
+    background: #dc2626;
+    animation: shake 0.4s;
+}
+
+.invalid {
+    background: #f59e0b;
+}
+
+/* Animations */
+@keyframes pop {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-6px); }
+    100% { transform: translateX(0); }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0px); }
+}
