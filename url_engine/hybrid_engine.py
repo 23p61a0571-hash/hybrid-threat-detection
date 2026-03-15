@@ -71,9 +71,9 @@ def hybrid_url_prediction(url):
         # =============================
         # 6️⃣ Risk Classification
         # =============================
-        if final_score >= 0.75:
+        if final_score >= 0.65:
             risk_level = "Malicious"
-        elif final_score >= 0.45:
+        elif final_score >= 0.40:
             risk_level = "Suspicious"
         else:
             risk_level = "Safe"

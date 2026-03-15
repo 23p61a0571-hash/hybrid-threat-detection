@@ -31,7 +31,7 @@
         <div class="input-box">
             <span class="icon-inside">🔗</span>
             <input type="text" name="url"
-                   placeholder="Enter website URL (https://example.com)" required>
+                   placeholder="https://example.com" required>
         </div>
 
         <button type="submit" class="btn btn-url">Analyze URL</button>
@@ -42,36 +42,31 @@
 
     {% if result %}
 
-        {% if "Safe" in result %}
-            <div class="result-badge safe">
-                ✔ SAFE URL
-            </div>
-
-        {% elif "Malicious" in result %}
-            <div class="result-badge unsafe shake">
-                ❌ MALICIOUS URL
-            </div>
-
-        {% else %}
-            <div class="result-badge invalid">
-                ⚠ SUSPICIOUS URL
-            </div>
-        {% endif %}
-
-
-        {% if confidence %}
-        <div class="risk-container">
-            <p><strong>📊 ML Confidence:</strong> {{ confidence }}%</p>
-
-            <div class="risk-bar">
-                <div class="risk-fill {% if 'Safe' in result %}low-risk{% else %}high-risk{% endif %}"
-                     style="width: {{ confidence }}%;">
-                </div>
-            </div>
+    {% if result == "Invalid URL Format" or result == "Invalid URL" %}
+        <div class="result-badge invalid">
+            ⚠ Please enter a valid URL
         </div>
-        {% endif %}
+
+    {% elif "Safe" in result %}
+        <div class="result-badge safe">
+            ✔ SAFE URL
+        </div>
+
+    {% elif "Malicious" in result %}
+        <div class="result-badge unsafe shake">
+            ❌ MALICIOUS URL
+        </div>
+
+    {% elif "Suspicious" in result %}
+        <div class="result-badge warning">
+            ⚠ SUSPICIOUS URL
+        </div>
 
     {% endif %}
+
+{% endif %}
+
+
 
 
 
@@ -202,7 +197,6 @@ new Chart(riskCtx, {
 </script>
 
 {% endif %}
-
 
 </body>
 </html>

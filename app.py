@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 from url_engine.url_feature_builder import build_feature_vector
 from file_engine.static_feature_extractor import extract_file_features
 import matplotlib
+import validators
 matplotlib.use('Agg')  # Important for Flask
 import matplotlib.pyplot as plt
 import os
@@ -48,24 +49,32 @@ def url_check():
 
         user_url = request.form.get("url")
 
-        # Input validation
+        # Empty input check
         if not user_url or user_url.strip() == "":
             return render_template(
                 "url_check.html",
-                result="Invalid",
+                result="Invalid URL",
+                confidence=0
+            )
+
+        # Add http if missing
+        if not user_url.startswith(("http://", "https://")):
+            user_url = "http://" + user_url
+
+        # URL format validation
+        if not validators.url(user_url):
+            return render_template(
+                "url_check.html",
+                result="Invalid URL Format",
                 confidence=0
             )
 
         try:
-            # Run hybrid prediction
-            features = build_feature_vector(user_url)
-            print("Extracted Features:", features)
             prediction = hybrid_url_prediction(user_url)
 
-            print("Prediction Output:", prediction)
-
-            # Build dynamic feature chart
             feature_chart = get_url_feature_chart(user_url)
+
+            generate_feature_importance()
 
             return render_template(
                 "url_check.html",
@@ -83,12 +92,11 @@ def url_check():
 
             return render_template(
                 "url_check.html",
-                result="Invalid",
+                result="Error Processing URL",
                 confidence=0
             )
 
     return render_template("url_check.html")
-
 # ==============================
 # File Checker (FULLY WORKING)
 # ==============================
@@ -199,7 +207,10 @@ def get_url_feature_chart(url):
         "labels": feature_names,
         "values": features[:len(feature_names)]
     }
+ALLOWED_EXTENSIONS = {"pdf", "txt", "docx", "exe"}
 
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 # ==============================
 # Run Server
 # ==============================

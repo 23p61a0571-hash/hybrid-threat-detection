@@ -134,6 +134,17 @@ body {
     background: linear-gradient(90deg, #ef4444, #b91c1c);
     color: white;
 }
+.result-badge.invalid {
+    background:#ffcc00;
+    color:#000;
+}
+.result-badge.warning {
+    background: linear-gradient(135deg,#ffe082,#ffca28);
+    color: #333;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: bold;
+}
 
 @keyframes pop {
     from { transform: scale(0.8); opacity: 0; }
